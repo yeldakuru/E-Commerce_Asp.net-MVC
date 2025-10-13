@@ -13,7 +13,7 @@ namespace ECommerce.Core.Entities
         public string? UserName { get; set; }= string.Empty;//başlangıçta değeri boş string ("") olsun
         public bool IsActive { get; set; }
         public bool IsAdmin { get; set; }
-        public DateTime CreateDate { get; set; } 
+        public DateTime CreateDate { get; set; } = DateTime.Now;//otomatik olarak oluşturulma tarihi atanır
         public Guid? UserGuid { get; set; }=Guid.NewGuid();//varsayılan olarak benzersiz bir Guid ile başlasın,
                                                            //sonradan null atanabilir
     }
