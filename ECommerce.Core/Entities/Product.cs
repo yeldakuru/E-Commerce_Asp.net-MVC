@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace ECommerce.Core.Entities
 {
    public class Product:IEntity
@@ -17,6 +19,7 @@ namespace ECommerce.Core.Entities
         public int? BrandId { get; set; }
         public Brand? Brand { get; set; }
         public int OrderNo { get; set; }
+        [ScaffoldColumn(false)]
         public DateTime CreateDate { get; set; }
     }
 }

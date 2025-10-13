@@ -1,5 +1,7 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ECommerce.Core.Entities
 {
     public class Brand:IEntity
@@ -10,7 +12,8 @@ namespace ECommerce.Core.Entities
         public string? Logo { get; set; }
         public bool IsActive { get; set; }
         public int OrderNo { get; set; }
+        [ScaffoldColumn(false)]
         public DateTime CreateDate { get; set; }
-        public IList<Product> Products { get; set; }
+        public IList<Product>? Products { get; set; }
     }
 }

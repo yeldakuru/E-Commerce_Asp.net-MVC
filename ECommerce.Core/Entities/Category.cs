@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace ECommerce.Core.Entities
 {
     public class Category:IEntity
@@ -11,6 +13,7 @@ namespace ECommerce.Core.Entities
         public bool IsTopMenu { get; set; }
         public int ParentId { get; set; }
         public int OrderNo { get; set; }
+        [ScaffoldColumn(false)]
         public DateTime CreateDate { get; set; }
         public IList<Product> Products { get; set; }//bir categorynin birden fazla productı olabilir
     }

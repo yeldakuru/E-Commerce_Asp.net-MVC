@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace E_Commerce_Asp.net_MVC.Areas.Admin.Controllers
+namespace ECommerce_UI.Areas.Admin.Controllers
 {
     public class MainController : Controller
     {
