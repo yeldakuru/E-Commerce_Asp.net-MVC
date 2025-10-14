@@ -1,36 +1,36 @@
-# ??? E-Commerce ASP.NET MVC Project
+# E-Commerce ASP.NET MVC Project
 
-Bu proje, ASP.NET MVC mimarisi kullanýlarak geliþtirilmiþ bir e-ticaret uygulamasýdýr.  
-Kullanýcýlar ürünleri görüntüleyebilir, sepete ekleyebilir ve satýn alma iþlemlerini gerçekleþtirebilir.
+This project is an e-commerce application developed using ASP.NET MVC architecture. 
+Users can view products, add them to their carts, and make purchases. 
 
 ---
 
 ## Features
-- Ürün listeleme, detay sayfasý
-- Kategoriye göre filtreleme
-- Kullanýcý giriþ/kayýt sistemi
-- Yönetici paneli (ürün ekleme/güncelleme/silme)
-- SQL Server veritabaný ile veri yönetimi
+- Product listing, detail page
+- Filter by category
+- User login/registration system
+- Admin panel (add/update/delete products)
+- Data management with SQL Server database
 - Entity Framework Core (Code First)
-- Loglama (log4net)
-- Validation ve Data Annotation desteði
+- Logging (log4net)
+- Validation and Data Annotation support
 
 ---
 
 ## Technologies Used
-| Teknoloji | Açýklama |
-|------------|-----------|
-| ASP.NET MVC | Web uygulama çatýsý |
-| Entity Framework Core | ORM (Veritabaný iþlemleri) |
-| SQL Server | Veritabaný |
-| log4net | Loglama sistemi |
-| Bootstrap | Arayüz tasarýmý |
-| C#  | Geliþtirme dili |
+| Technology |
+|------------|
+| ASP.NET MVC | 
+| Entity Framework Core | 
+| SQL Server | 
+| log4net | 
+| Bootstrap |
+| C#  |
 
 ---
 # Packages
- | Microsoft.EntityFrameworkCore.SqlServer |
- | Microsoft.EntityFrameworkCore.Tools |
- | Microsoft.EntityFrameworkCore.Design |
+ - Microsoft.EntityFrameworkCore.SqlServer 
+ - Microsoft.EntityFrameworkCore.Tools 
+ - Microsoft.EntityFrameworkCore.Design 
 
 
