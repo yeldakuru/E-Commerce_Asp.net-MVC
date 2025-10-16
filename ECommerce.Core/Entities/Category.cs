@@ -14,7 +14,7 @@ namespace ECommerce.Core.Entities
         public int ParentId { get; set; }
         public int OrderNo { get; set; }
         [ScaffoldColumn(false)]
-        public DateTime CreateDate { get; set; }
-        public IList<Product> Products { get; set; }//bir categorynin birden fazla productı olabilir
+        public DateTime CreateDate { get; set; }= DateTime.Now;
+        public IList<Product>? Products { get; set; }//bir categorynin birden fazla productı olabilir
     }
 }

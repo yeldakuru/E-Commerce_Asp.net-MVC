@@ -13,7 +13,7 @@ namespace ECommerce.Core.Entities
         public bool IsActive { get; set; }
         public int OrderNo { get; set; }
         [ScaffoldColumn(false)]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }=DateTime.Now;
         public IList<Product>? Products { get; set; }
     }
 }

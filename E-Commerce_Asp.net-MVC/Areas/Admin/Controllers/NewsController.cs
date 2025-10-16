@@ -3,29 +3,27 @@ using ECommerce.Core.Entities;
 using ECommerce.Data;
 using ECommerce_UI.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;//selectlist
 using Microsoft.EntityFrameworkCore;
-using System.Drawing.Drawing2D;
 
 namespace ECommerce_UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CategoriesController : Controller
+    public class NewsController : Controller
     {
         private readonly DatabaseContext _context;
 
-        public CategoriesController(DatabaseContext context)
+        public NewsController(DatabaseContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/Categories
+        // GET: Admin/News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _context.News.ToListAsync());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/News/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,43 +31,39 @@ namespace ECommerce_UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var news = await _context.News
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(news);
         }
 
-        // GET: Admin/Categories/Create
-        public async Task<IActionResult> CreateAsync()
+        // GET: Admin/News/Create
+        public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(_context.Categories,"Id","Name");
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/News/Create
       
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Category category, IFormFile? Image)
+        public async Task<IActionResult> Create( News news,IFormFile? Image)
         {
             if (ModelState.IsValid)
             {
-
-                category.Image = await FileHelper.FileLoaderAsync(Image, "/Img/Categories/");
-                await _context.AddAsync(category);
+                news.Image = await FileHelper.FileLoaderAsync(Image,"/Img/");
+                _context.Add(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
-            return View(category);
+            return View(news);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/News/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +71,20 @@ namespace ECommerce_UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var news = await _context.News.FindAsync(id);
+            if (news == null)
             {
                 return NotFound();
             }
-
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
-            return View(category);
+            return View(news);
         }
 
-        // POST: Admin/Categories/Edit/5
-       
+        // POST: Admin/News/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Category category, IFormFile? Image, bool cbDeleteImage = false)
+        public async Task<IActionResult> Edit(int id, News news, IFormFile? Image,bool cbDeleteImage=false)
         {
-            if (id != category.Id)
+            if (id != news.Id)
             {
                 return NotFound();
             }
@@ -102,17 +93,17 @@ namespace ECommerce_UI.Areas.Admin.Controllers
             {
                 try
                 {
-                    if(cbDeleteImage)
-                        category.Image=string.Empty;
+                    if (cbDeleteImage)
+                        news.Image = string.Empty;
 
                     if (Image is not null)
-                        category.Image = await FileHelper.FileLoaderAsync(Image, "/Img/Categories/");
-                    _context.Update(category);
+                        news.Image = await FileHelper.FileLoaderAsync(Image, "/Img/");
+                    _context.Update(news);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.Id))
+                    if (!NewsExists(news.Id))
                     {
                         return NotFound();
                     }
@@ -123,12 +114,10 @@ namespace ECommerce_UI.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name");
-            return View(category);
+            return View(news);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/News/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,38 +125,38 @@ namespace ECommerce_UI.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories
+            var news = await _context.News
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
+            if (news == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(news);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/News/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            var news = await _context.News.FindAsync(id);
+            if (news != null)
             {
-                if (!string.IsNullOrEmpty(category.Image))
+                if (!string.IsNullOrEmpty(news.Image))
                 {
-                    FileHelper.FileRemover(category.Image,"/Img/Categories/");
+                    FileHelper.FileRemover(news.Image, "/Img/");
                 }
-                _context.Categories.Remove(category);
+                _context.News.Remove(news);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool NewsExists(int id)
         {
-            return _context.Categories.Any(e => e.Id == id);
+            return _context.News.Any(e => e.Id == id);
         }
     }
 }

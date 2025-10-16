@@ -20,6 +20,6 @@ namespace ECommerce.Core.Entities
         public Brand? Brand { get; set; }
         public int OrderNo { get; set; }
         [ScaffoldColumn(false)]
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }= DateTime.Now;
     }
 }
