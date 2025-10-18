@@ -1,24 +1,31 @@
-using System.Diagnostics;
+using ECommerce.Data;
 using ECommerce_UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace ECommerce_UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DatabaseContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Sliders.ToListAsync());
+        }
+      
+
+        public IActionResult Privacy()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public IActionResult ContactUs()
         {
             return View();
         }
