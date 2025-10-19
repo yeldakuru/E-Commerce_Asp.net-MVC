@@ -8,12 +8,12 @@ namespace ECommerce.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder.Property(x=>x.Name).IsRequired().HasColumnType("nvarchar(20)").HasMaxLength(20);
-            builder.Property(x => x.Surname).IsRequired().HasColumnType("nvarchar(20)").HasMaxLength(20);
-            builder.Property(x => x.Email).IsRequired().HasColumnType("nvarchar(40)").HasMaxLength(40);
-            builder.Property(x => x.Phone).HasColumnType("nvarchar(15)").HasMaxLength(15);
-            builder.Property(x => x.Password).IsRequired().HasColumnType("nvarchar(20)").HasMaxLength(20);
-            builder.Property(x => x.UserName).HasColumnType("nvarchar(20)").HasMaxLength(20);
+            builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(50)").HasMaxLength(50);
+            builder.Property(x => x.Surname).IsRequired().HasColumnType("varchar(50)").HasMaxLength(50);
+            builder.Property(x => x.Email).IsRequired().HasColumnType("varchar(50)").HasMaxLength(50);
+            builder.Property(x => x.Phone).HasColumnType("varchar(15)").HasMaxLength(15);
+            builder.Property(x => x.Password).IsRequired().HasColumnType("nvarchar(50)").HasMaxLength(50);
+            builder.Property(x => x.UserName).HasColumnType("varchar(50)").HasMaxLength(50);
 
             //seed data,admin kaydı için
             builder.HasData(
@@ -28,7 +28,39 @@ namespace ECommerce.Data.Configurations
                     Password="123456",
                     Surname="user"
 
-                });
+                }, new AppUser
+                {
+                    Id = 2,
+                    UserName = "yelda",
+                    Email = "yelda@example.com",
+                    IsActive = true,
+                    IsAdmin = false,
+                    Name = "Yelda",
+                    Surname = "Kuru",
+                    Password = "123456"
+                },
+            new AppUser
+            {
+                Id = 3,
+                UserName = "ahmet",
+                Email = "ahmet@example.com",
+                IsActive = true,
+                IsAdmin = false,
+                Name = "Ahmet",
+                Surname = "Demir",
+                Password = "654321"
+            },
+            new AppUser
+            {
+                Id = 4,
+                UserName = "elif",
+                Email = "elif@example.com",
+                IsActive = true,
+                IsAdmin = false,
+                Name = "Elif",
+                Surname = "Yılmaz",
+                Password = "123123"
+            });
         }
     }
 }

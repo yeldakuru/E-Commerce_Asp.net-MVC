@@ -17,7 +17,13 @@ namespace ECommerce_UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sliders.ToListAsync());
+            var model = new HomePageViewModel()
+            {
+                Sliders = await _context.Sliders.ToListAsync(),
+                News = await _context.News.ToListAsync(),
+                Products = await _context.Products.Where(p=>p.IsActive && p.IsHome).ToListAsync()
+            };
+            return View(model);
         }
       
 

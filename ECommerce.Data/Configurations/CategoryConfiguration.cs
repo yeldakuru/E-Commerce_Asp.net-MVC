@@ -9,7 +9,7 @@ namespace ECommerce.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.Name).IsRequired().HasMaxLength(50);
             builder.Property(x => x.Image).HasMaxLength(50);
 
             builder.HasData(
@@ -32,7 +32,46 @@ namespace ECommerce.Data.Configurations
                     ParentId = 0,
                     OrderNo = 2,
 
-                }
+                },
+               new Category
+               {
+                   Id = 3,
+                   Name = "Monitör",
+                   IsActive = true,
+                   IsTopMenu = false,
+                   ParentId = 1, // Elektronik altında
+                   OrderNo = 3
+               },
+                new Category
+                {
+                    Id = 4,
+                    Name = "Klavye",
+                    IsActive = true,
+                    IsTopMenu = false,
+                    ParentId = 2, // Bilgisayar altında
+                    OrderNo = 4
+                },
+                  new Category
+                  {
+                      Id = 5,
+                      Name = "Konsol",
+                      IsActive = true,
+                      IsTopMenu = false,
+                      ParentId = 1, // Elektronik altında
+                      OrderNo = 5
+                  },
+                   new Category
+                   {
+                       Id = 6,
+                       Name = "Aksesuar",
+                       IsActive = true,
+                       IsTopMenu = false,
+                       ParentId = 0, // Elektronik altında
+                       OrderNo = 6
+                   }
+
+
+
                );
 
 
