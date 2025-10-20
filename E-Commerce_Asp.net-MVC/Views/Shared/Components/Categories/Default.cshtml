@@ -11,7 +11,7 @@
 			<ul class="dropdown-menu">
 				@foreach (var subCategory in Model.Where(c => c.IsActive && c.IsTopMenu && c.ParentId == mainCategory.Id))
 				{
-						<li><a class="dropdown-item" href="/Categories/Index/@subCategory.Id">@subCategory.Name</a></li>
+					<li><a class="dropdown-item" href="/Categories/Index/@subCategory.Id">@subCategory.Name</a></li>
 				}
 			
 				
