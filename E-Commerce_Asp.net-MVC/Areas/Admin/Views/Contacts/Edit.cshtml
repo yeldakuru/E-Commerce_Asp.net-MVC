@@ -1,18 +1,17 @@
 ﻿@model ECommerce.Core.Entities.Contact
 
 @{
-    ViewData["Title"] = "ContactUs";
+    ViewData["Title"] = "Contact Form Edit";
 }
-<div class="text-center">
-	<h1>Contact</h1>
-</div>
 
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ContactUs">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreateDate" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -35,17 +34,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <textarea asp-for="Message" class="form-control"></textarea>
+               
+				<textarea asp-for="Message" class="form-control"></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group mt-2">
-                <input type="submit" value="Send" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
-    <div class="col-md-8">
-        <h5>Contact Us</h5>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d385396.60304351593!2d29.012179!3d41.005322!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14caa7040068086b%3A0xe1ccfe98bc01b0d0!2zxLBzdGFuYnVs!5e0!3m2!1str!2str!4v1730442294580!5m2!1str!2str" 
-        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
 </div>
+
