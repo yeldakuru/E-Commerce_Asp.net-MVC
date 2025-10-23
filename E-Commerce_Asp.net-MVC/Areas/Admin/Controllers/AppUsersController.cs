@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Core.Entities;
 using ECommerce.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce_UI.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Policy ="AdminPolicy")]
     public class AppUsersController : Controller
     {
         private readonly DatabaseContext _context;

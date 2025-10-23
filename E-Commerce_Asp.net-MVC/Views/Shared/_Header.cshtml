@@ -1,12 +1,12 @@
 ﻿<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E_Commerce_Asp.net_MVC</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerce_UI</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex ">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-evenly ">
                 <form action="/Products" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
                     <input name="q" type="search" class="form-control" placeholder="Search Product..." aria-label="Search">
                 </form>
@@ -20,16 +20,35 @@
                         <a class="nav-link text-dark" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
                     </li>
                 </ul>
-                <div class="dropdown">
-                    <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person"></i>
-                        Login
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sign In</a></li>
-                        <li><a class="dropdown-item" href="#">Sign Up</a></li>
-                    </ul>
-                </div>
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i>
+                           My Account
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Account">My User Info</a></li>
+                            <li><a class="dropdown-item" href="/Account/">My Orders</a></li>
+                            <li><a class="dropdown-item" href="/Account/">My Reviews</a></li>
+                            <li><a class="dropdown-item" href="/Account/SignOut">Sign Out</a></li>
+						</ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person"></i>
+                            Login
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Account/SignIn">Sign In</a></li>
+                            <li><a class="dropdown-item" href="/Account/SignUp">Sign Up</a></li>
+                        </ul>
+                    </div>
+                }
+               
                
                
             </div>

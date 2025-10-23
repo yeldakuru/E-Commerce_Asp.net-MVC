@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using ECommerce.Core.Entities;
 using ECommerce.Data;
 using ECommerce_UI.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce_UI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area("Admin"), Authorize(Policy = "AdminPolicy")]
     public class BrandsController : Controller
     {
         private readonly DatabaseContext _context;

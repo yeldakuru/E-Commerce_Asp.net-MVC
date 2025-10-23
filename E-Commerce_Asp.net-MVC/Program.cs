@@ -1,5 +1,7 @@
 using ECommerce.Data;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 if (builder.Environment.IsDevelopment())
 {
@@ -10,9 +12,28 @@ else
 {
     builder.Services.AddControllersWithViews();
 }
+
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x=>
+    {
+        x.LoginPath = "/Account/SignIn";
+        x.AccessDeniedPath = "/AccessDenied";
+        x.Cookie.Name = "Account";
+        x.Cookie.MaxAge = TimeSpan.FromDays(7);
+        x.Cookie.IsEssential = true;
+    });//cookie tabanlý authentication ekleniyor
+
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("AdminPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));//sadece Admin rolüne sahip kullanýcýlar eriþebilir
+    x.AddPolicy("UserPolicy", policy => policy.RequireClaim(ClaimTypes.Role, "Admin", "User", "Customer"));
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,7 +49,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+
+app.UseAuthentication(); // önce oturum açma
+app.UseAuthorization(); // sonra yetkilendirme
+
 
 app.MapControllerRoute(
  name: "admin",
