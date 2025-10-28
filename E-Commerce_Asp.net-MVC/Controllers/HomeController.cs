@@ -56,7 +56,7 @@ namespace ECommerce_UI.Controllers
                     if (sonuc > 0)
                     {
                         TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
-                        <strong>Mesajýnýz Gönderilmiþtir!</strong>
+                        <strong>Your message has been updated!</strong>
                         <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button></div>";
 
                       //  await MailHelper.SendMailAsync(contact);
