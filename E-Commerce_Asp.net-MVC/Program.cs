@@ -3,19 +3,23 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
-if (builder.Environment.IsDevelopment())
-{
-    builder.Services.AddControllersWithViews()
-           .AddRazorRuntimeCompilation();
-}
-else
-{
-    builder.Services.AddControllersWithViews();
-}
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession(options=>
+{
+    options.Cookie.Name = ".ECommerce.Session";//session cookie adý
+    options.Cookie.HttpOnly = true;//sadece sunucu tarafýnda eriþilebilir
+    options.Cookie.IsEssential = true;//gizlilik politikalarýndan baðýmsýz olarak gerekli
+    options.IdleTimeout = TimeSpan.FromDays(1);//boþta kalma süresi
+    options.IOTimeout = TimeSpan.FromMinutes(10);//giriþ/çýkýþ iþlemleri için zaman aþýmý süresi
+});//bir kullanýcýnýn oturumu boyunca (örneðin siteye giriþ yaptýðý süre boyunca)
+//veriyi sunucuda saklamak için kullanýlýr.
+
+
+
+
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(x=>
@@ -48,7 +52,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 
 app.UseAuthentication(); // önce oturum açma
 app.UseAuthorization(); // sonra yetkilendirme

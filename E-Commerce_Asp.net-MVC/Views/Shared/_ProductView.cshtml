@@ -4,12 +4,12 @@
     <div class="card h-100">
         <!-- Sale badge-->
         <div class="badge position-absolute" style="top: 0.5rem; right: 0.5rem">Sale
-          @*   <form asp-action="Add" asp-controller="Favorites">
+            <form asp-action="add" asp-controller="Favorites">
                 <input type="hidden" name="ProductId" value="@Model.Id" />
                 <button class="btn btn-transparent" type="submit" style="box-shadow: none">
                     <i class="bi bi-heart"></i>
                 </button>
-            </form> *@
+            </form>
         </div>
         <!-- Product image-->
         <a href="/Products/Details/@Model.Id">
