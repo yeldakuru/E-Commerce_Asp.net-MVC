@@ -1,4 +1,5 @@
-﻿using ECommerce.Data;
+﻿using ECommerce.Core.Entities;
+using ECommerce.Service.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,11 +7,10 @@ namespace ECommerce_UI.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly DatabaseContext _context;
-
-        public CategoriesController(DatabaseContext context)
+        private readonly IService<Category> _service;
+        public CategoriesController(IService<Category> service)
         {
-            _context = context;
+            _service = service;
         }
         public async Task<IActionResult> IndexAsync(int? id)
         {
@@ -19,7 +19,7 @@ namespace ECommerce_UI.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categories.Include(p => p.Products)
+            var category = await _service.GetQueryable().Include(p => p.Products)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {

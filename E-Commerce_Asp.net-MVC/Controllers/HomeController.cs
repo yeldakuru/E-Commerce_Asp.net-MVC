@@ -1,29 +1,31 @@
 using ECommerce.Core.Entities;
-using ECommerce.Data;
+using ECommerce.Service.Abstract;
 using ECommerce_UI.Models;
-using ECommerce_UI.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ECommerce_UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DatabaseContext _context;
-
-        public HomeController(DatabaseContext context)
+        private readonly IService<Product> _serviceProduct;
+        private readonly IService<Slider> _serviceSlider;
+        private readonly IService<News> _serviceNews;
+        private readonly IService<Contact> _serviceContact;
+        public HomeController(IService<Product> serviceProduct, IService<Slider> serviceSlider, IService<News> serviceNews, IService<Contact> serviceContact)
         {
-            _context = context;
+            _serviceProduct = serviceProduct;
+            _serviceSlider = serviceSlider;
+            _serviceNews = serviceNews;
+            _serviceContact= serviceContact;
         }
-
         public async Task<IActionResult> Index()
         {
             var model = new HomePageViewModel()
             {
-                Sliders = await _context.Sliders.ToListAsync(),
-                News = await _context.News.ToListAsync(),
-                Products = await _context.Products.Where(p => p.IsActive && p.IsHome).ToListAsync()
+                Sliders = await _serviceSlider.GetAllAsync(),
+                News = await _serviceNews.GetAllAsync(),
+                Products = await _serviceProduct.GetAllAsync(p => p.IsActive && p.IsHome)
             };
             return View(model);
         }
@@ -51,8 +53,8 @@ namespace ECommerce_UI.Controllers
             {
                 try
                 {
-                    await _context.Contacts.AddAsync(contact);
-                    var sonuc = await _context.SaveChangesAsync();
+                    await _serviceContact.AddAsync(contact);
+                    var sonuc = await _serviceContact.SaveChangesAsync();
                     if (sonuc > 0)
                     {
                         TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
@@ -65,7 +67,7 @@ namespace ECommerce_UI.Controllers
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "Beklenmeyen bir hata oluþtu.");
+                    ModelState.AddModelError("", "An error occurred!!");
                 }
 
             }

@@ -1,4 +1,6 @@
-﻿using ECommerce.Data;
+﻿using ECommerce.Core.Entities;
+using ECommerce.Data;
+using ECommerce.Service.Abstract;
 using ECommerce_UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +10,20 @@ namespace ECommerce_UI.Controllers
     public class ProductsController : Controller
     {
 
-        private readonly DatabaseContext _context;
-
-        public ProductsController(DatabaseContext context)
+        private readonly IService<Product> _service;
+        public ProductsController(IService<Product> service)
         {
-            _context = context;
+            _service = service;
+        }
+        public async Task<IActionResult> Index()
+        {
+            return View(await _service.GetAllAsync());
         }
         public async Task<IActionResult> Index(string q="")
         {
-            var databaseContext = _context.Products.Where(p=>p.IsActive &&p.Name.Contains(q) ||
-            p.Description.Contains(q)).Include(p => p.Brand).Include(p => p.Category);
-            return View(await databaseContext.ToListAsync());
+            var databaseContext = _service.GetAllAsync(p => p.IsActive && p.Name.Contains(q) ||
+            p.Description.Contains(q));
+            return View(await databaseContext);
         }
         
 
@@ -29,7 +34,7 @@ namespace ECommerce_UI.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
+            var product = await _service.GetQueryable()
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -40,7 +45,7 @@ namespace ECommerce_UI.Controllers
             var model=new ProductDetailViewModel()
             { 
                 Product=product,
-                RelatedProducts=_context.Products.Where(p=>p.IsActive && p.CategoryId==
+                RelatedProducts= _service.GetQueryable().Where(p=>p.IsActive && p.CategoryId==
                 product.CategoryId && p.Id!=product.Id)
             };
             return View(model);
