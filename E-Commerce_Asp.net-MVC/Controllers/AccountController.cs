@@ -4,6 +4,7 @@ using ECommerce_UI.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace ECommerce_UI.Controllers
@@ -17,12 +18,14 @@ namespace ECommerce_UI.Controllers
         //    _context = context;
         //}
         private readonly IService<AppUser> _service;
-        public AccountController(IService<AppUser> service)
+        private readonly IService<Order> _serviceOrder;
+        public AccountController(IService<AppUser> service, IService<Order> serviceOrder)
         {
             _service = service;
+            _serviceOrder = serviceOrder;
         }
         [Authorize]
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             AppUser user = await _service.GetAsync(x=>x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
             if(user is null)
@@ -76,6 +79,18 @@ namespace ECommerce_UI.Controllers
                 }
             }
             return View(model);
+        }
+        [Authorize]
+        public async Task<IActionResult> MyOrders()
+        {
+            AppUser user = await _service.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
+            if (user is null)
+            {
+                await HttpContext.SignOutAsync();
+                return RedirectToAction("SignIn");
+            }
+            var model=_serviceOrder.GetQueryable().Where(x=>x.AppUserId==user.Id).Include(o=>o.OrderLines).ThenInclude(p=>p.Product);
+            return View();
         }
         public IActionResult SignIn()
         {
@@ -133,7 +148,7 @@ namespace ECommerce_UI.Controllers
             {
                 await _service.AddAsync(appUser);
                 await _service.SaveChangesAsync();
-                return RedirectToAction(nameof(IndexAsync));
+                return RedirectToAction(nameof(Index));
             }
             return View(appUser);
         }

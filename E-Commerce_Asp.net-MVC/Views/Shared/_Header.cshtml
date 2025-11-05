@@ -28,9 +28,10 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="/Account">My User Info</a></li>
+							<li><a class="dropdown-item" href="/MyAddresses">My Registered Addresses</a></li>
 							<li><a class="dropdown-item" href="/Account/">My Orders</a></li>
 							<li><a class="dropdown-item" href="/Account/">My Reviews</a></li>
-							<li><a class="dropdown-item" href="/Account/SignOut">Sign Out</a></li>
+							<li class="text-center"><a class="btn btn-danger" href="/Account/SignOut">Sign Out</a></li>
 						</ul>
 					</div>
 				}
@@ -47,14 +48,14 @@
 						</ul>
 					</div>
 				}
-				<div class="dropdown">
+				<div class="dropdown mx-3">
 					<a class="nav-link text-dark" href="/Favorites">
 						<i class="bi bi-person"></i>
 						My Favorites
 					</a>
 
 				</div>
-				<div class="dropdown">
+				<div class="dropdown me-3">
 					@{
 						var cart = Context.Session.GetJson<ECommerce.Service.Concrete.CartService>("Cart");
 						if (cart != null && cart.CartLines.Count > 0)
@@ -63,6 +64,9 @@
 							<a class="dropdown-toggle nav-link text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="bi bi-person"></i>
 								My Cart
+							   <span class="badge bg-danger text-white ms-1 rounded-pill">
+									@cart.CartLines.Count
+							   </span>
 							</a>
 							<ul class="dropdown-menu">
 								@foreach (var item in cart.CartLines)

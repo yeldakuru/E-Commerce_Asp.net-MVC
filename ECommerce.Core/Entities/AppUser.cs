@@ -19,5 +19,6 @@ namespace ECommerce.Core.Entities
         public DateTime CreateDate { get; set; } = DateTime.Now;//otomatik olarak oluşturulma tarihi atanır
         public Guid? UserGuid { get; set; }=Guid.NewGuid();//varsayılan olarak benzersiz bir Guid ile başlasın,
                                                            //sonradan null atanabilir
+        public List<Address>? Addresses { get; set; }
     }
 }

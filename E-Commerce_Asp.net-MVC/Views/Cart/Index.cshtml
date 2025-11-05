@@ -76,7 +76,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Sipariş Toplamı</th>
+                        <th>Total Order</th>
                         <td>
                             @(Model.TotalPrice > 999 ? Model.TotalPrice.ToString("c") : (Model.CartLines.Any() ? Model.TotalPrice + 99 : Model.TotalPrice.ToString("c")))
                         </td>

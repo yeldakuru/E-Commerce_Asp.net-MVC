@@ -3,19 +3,25 @@ using ECommerce.Service.Abstract;
 using ECommerce.Service.Concrete;
 using ECommerce_UI.ExtensionMethods;
 using ECommerce_UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace ECommerce_UI.Controllers
 {
     public class CartController : Controller
     {
         private readonly IService<Product> _serviceProduct;
-      
-
-        public CartController(IService<Product> serviceProduct)
+        private readonly IService<Address> _serviceAddress;
+        private readonly IService<AppUser> _serviceAppUser;
+        private readonly IService<Order> _serviceOrder;
+        public CartController(IService<Product> serviceProduct, IService<Address> serviceAddress, IService<AppUser> serviceAppUser, IService<Order> serviceOrder)
         {
             _serviceProduct = serviceProduct;
-           
+            _serviceAddress = serviceAddress;
+            _serviceAppUser = serviceAppUser;
+            _serviceOrder = serviceOrder;
         }
         public IActionResult Index()
         {
@@ -62,7 +68,31 @@ namespace ECommerce_UI.Controllers
             }
             return RedirectToAction("Index");
         }
-       
+
+        [Authorize]//sadece login olan kullanıcılar erişebilir
+        public async Task<IActionResult> CheckoutAsync()
+        {
+
+            var cart = GetCart();
+            var appUser = await _serviceAppUser.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
+            if (appUser == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            var addresses = await _serviceAddress.GetAllAsync(a => a.AppUserId == appUser.Id && a.IsActive);
+            var model = new CheckoutViewModel()
+            {
+                CartProducts = cart.CartLines,
+                TotalPrice = cart.TotalPrice(),
+                Addresses = addresses
+            };
+            return View(model);
+        }
+      
+        public IActionResult Thanks()
+        {
+            return View();
+        }
         private CartService GetCart()
         {
             return HttpContext.Session.GetJson<CartService>("Cart") ?? new CartService();
