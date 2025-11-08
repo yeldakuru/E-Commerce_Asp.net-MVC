@@ -88,7 +88,53 @@ namespace ECommerce_UI.Controllers
             };
             return View(model);
         }
-      
+        public async Task<IActionResult> Checkout(string CardNameSurname, string CardNumber, string CardMonth, string CardYear, string CVV, string DeliveryAddress, string BillingAddress)
+        {
+            var cart = GetCart();
+            var appUser = await _serviceAppUser.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
+            if (appUser == null)
+            {
+                return RedirectToAction("SignIn", "Account");
+            }
+            var addresses = await _serviceAddress.GetAllAsync(a => a.AppUserId == appUser.Id && a.IsActive);
+            var model = new CheckoutViewModel()
+            {
+                CartProducts = cart.CartLines,
+                TotalPrice = cart.TotalPrice(),
+                Addresses = addresses
+            };
+            if (string.IsNullOrWhiteSpace(CardNumber) || string.IsNullOrWhiteSpace(CardMonth) || string.IsNullOrWhiteSpace(CardYear) || string.IsNullOrWhiteSpace(CVV) || string.IsNullOrWhiteSpace(DeliveryAddress) || string.IsNullOrWhiteSpace(BillingAddress))
+            {
+                return View(model);
+            }
+            var faturaAdresi = addresses.FirstOrDefault(a => a.AddressGuid.ToString() == BillingAddress);
+            var teslimatAdresi = addresses.FirstOrDefault(a => a.AddressGuid.ToString() == DeliveryAddress);
+
+            var siparis = new Order
+            {
+                AppUserId = appUser.Id,
+                BillingAddress = $"{faturaAdresi.OpenAddress} {faturaAdresi.District} {faturaAdresi.City}",// BillingAddress,
+                DeliveryAddress = $"{faturaAdresi.OpenAddress} {faturaAdresi.District} {faturaAdresi.City}",//DeliveryAddress,
+                CustomerId = appUser.UserGuid.ToString(),
+                OrderDate = DateTime.Now,
+                TotalPrice = cart.TotalPrice(),
+                OrderNumber = Guid.NewGuid().ToString(),
+                OrderState = 0,
+                OrderLines = []
+            };
+            foreach (var item in cart.CartLines)
+            {
+                siparis.OrderLines.Add(new OrderLine
+                {
+                    ProductId = item.Product.Id,
+                    OrderId = siparis.Id,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.Product.Price
+                });
+
+            }
+            return View(model);
+        }
         public IActionResult Thanks()
         {
             return View();
