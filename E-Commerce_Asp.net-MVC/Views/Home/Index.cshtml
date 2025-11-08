@@ -6,8 +6,9 @@
 
 <partial name="_Slider" model="Model.Sliders" />
 
-
-<div class="my-5">
+@if (Model.Products is not null && Model.Products.Count > 0)
+{
+	<div class="my-5">
 	<h1 class="text-center">Special Products for You</h1>
 	<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 		@foreach (var item in Model.Products)
@@ -16,8 +17,11 @@
 		}
 	</div>
 </div>
+}
 
-<div class="my-5">
+@if (Model.News is not null && Model.News.Count > 0)
+{
+	<div class="my-5">
 	<h1 class="text-center">Campaigns</h1>
 	<div class="row gx-4 gx-lg-5 row-cols-2 justify-content-center">
 		@foreach (var item in Model.News)
@@ -26,3 +30,5 @@
 		}
 	</div>
 </div>
+
+}

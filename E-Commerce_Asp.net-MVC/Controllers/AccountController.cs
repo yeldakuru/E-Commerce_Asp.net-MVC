@@ -1,6 +1,7 @@
 ﻿using ECommerce.Core.Entities;
 using ECommerce.Service.Abstract;
 using ECommerce_UI.Models;
+using ECommerce_UI.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -156,6 +157,84 @@ namespace ECommerce_UI.Controllers
         {
             await HttpContext.SignOutAsync();
             return RedirectToAction("SignIn");
+        }
+        public IActionResult PasswordRenew()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PasswordRenewAsync(string Email)
+        {
+            if (string.IsNullOrWhiteSpace(Email))
+            {
+                ModelState.AddModelError("", "Email Cannot Be Empty!");
+                return View();
+            }
+            AppUser user = await _service.GetAsync(x => x.Email == Email);
+            if (user is null)
+            {
+                ModelState.AddModelError("", "The email you entered was not found!");
+                return View();
+            }
+            string mesaj = $"Sayın {user.Name} {user.Surname} <br> To Reset Your Password, Please <a href='https://localhost:7239/Account/PasswordChange?user={user.UserGuid.ToString()}'>Click here</a>";
+            var sonuc = await MailHelper.SendMailAsync(Email, "Reset My Password", mesaj);
+            if (sonuc)
+            {
+                TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                        <strong>Your Password Reset Link Has Been Sent To Your Email Address!</strong>
+    <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+    </div>";
+            }
+            else
+            {
+                TempData["Message"] = @"<div class=""alert alert-danger alert-dismissible fade show"" role=""alert"">
+                        <strong>Your Password Reset Link Could Not Be Sent To Your Email Address!</strong>
+    <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+    </div>";
+            }
+            return View();
+        }
+        public async Task<IActionResult> PasswordChangeAsync(string user)
+        {
+            if (user is null)
+            {
+                return BadRequest("Invalid Request!");
+            }
+            AppUser appUser = await _service.GetAsync(x => x.UserGuid.ToString() == user);
+            if (appUser is null)
+            {
+                return NotFound("Invalid Value!");
+            }
+            return View();
+        }
+      
+        [HttpPost]
+        public async Task<IActionResult> PasswordChange(string user, string Password)
+        {
+            if (user is null)
+            {
+                return BadRequest("Invalid Request!");
+            }
+            AppUser appUser = await _service.GetAsync(x => x.UserGuid.ToString() == user);
+            if (appUser is null)
+            {
+                ModelState.AddModelError("", "Invalid Value!");
+                return View();
+            }
+            appUser.Password = Password;
+            var sonuc = await _service.SaveChangesAsync();
+            if (sonuc > 0)
+            {
+                TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
+                        <strong>Your password has been updated! You can log in from the login screen.</strong>
+    <button type=""button"" class=""btn-close"" data-bs-dismiss=""alert"" aria-label=""Close""></button>
+    </div>";
+            }
+            else
+            {
+                ModelState.AddModelError("", "Update Failed!");
+            }
+            return View();
         }
     }
 }
