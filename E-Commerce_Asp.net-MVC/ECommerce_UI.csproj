@@ -5,9 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>ECommerce_UI</RootNamespace>
+    <UserSecretsId>85990a46-fe2c-48db-be74-e757dbbf4db5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Iyzipay" Version="2.1.67" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
       <PrivateAssets>all</PrivateAssets>
