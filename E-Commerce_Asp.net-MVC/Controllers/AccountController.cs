@@ -28,24 +28,24 @@ namespace ECommerce_UI.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            AppUser user = await _service.GetAsync(x=>x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
-            if(user is null)
+            AppUser user = await _service.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
+            if (user is null)
             {
                 return NotFound();
             }
-            var model=new UserEditViewModel()
+            var model = new UserEditViewModel()
             {
 
-                Email=user.Email,
-                Id=user.Id,
-                Name=user.Name,
-                Password=user.Password,
-                Phone=user.Phone,
-                Surname=user.Surname
+                Email = user.Email,
+                Id = user.Id,
+                Name = user.Name,
+                Password = user.Password,
+                Phone = user.Phone,
+                Surname = user.Surname
             };
             return View(model);
         }
-        [HttpPost,Authorize]
+        [HttpPost, Authorize]
         public async Task<IActionResult> IndexAsync(UserEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -55,13 +55,13 @@ namespace ECommerce_UI.Controllers
                     AppUser user = await _service.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
                     if (user is not null)
                     {
-                       user.Surname = model.Surname;
+                        user.Surname = model.Surname;
                         user.Phone = model.Phone;
                         user.Name = model.Name;
                         user.Password = model.Password;
                         user.Email = model.Email;
                         _service.Update(user);
-                       var sonuc= _service.SaveChanges();
+                        var sonuc = _service.SaveChanges();
                         if (sonuc > 0)
                         {
                             TempData["Message"] = @"<div class=""alert alert-success alert-dismissible fade show"" role=""alert"">
@@ -76,13 +76,14 @@ namespace ECommerce_UI.Controllers
                 catch (Exception)
                 {
 
-                   ModelState.AddModelError("", "An error occurred!!");
+                    ModelState.AddModelError("", "An error occurred!!");
                 }
             }
             return View(model);
         }
         [Authorize]
         public async Task<IActionResult> MyOrders()
+
         {
             AppUser user = await _service.GetAsync(x => x.UserGuid.ToString() == HttpContext.User.FindFirst("UserGuid").Value);
             if (user is null)
@@ -90,7 +91,7 @@ namespace ECommerce_UI.Controllers
                 await HttpContext.SignOutAsync();
                 return RedirectToAction("SignIn");
             }
-            var model=_serviceOrder.GetQueryable().Where(x=>x.AppUserId==user.Id).Include(o=>o.OrderLines).ThenInclude(p=>p.Product);
+            var model = _serviceOrder.GetQueryable().Where(x => x.AppUserId == user.Id).Include(o => o.OrderLines).ThenInclude(p => p.Product);
             return View();
         }
         public IActionResult SignIn()
@@ -113,7 +114,7 @@ namespace ECommerce_UI.Controllers
                     }
                     else
                     {
-                        var claims=new List<Claim>()
+                        var claims = new List<Claim>()
                         { new(ClaimTypes.Name, account.Name),
                             new(ClaimTypes.Role, account.IsAdmin ? "Admin" : "Customer"),
                             new(ClaimTypes.Email, account.Email),
@@ -207,7 +208,7 @@ namespace ECommerce_UI.Controllers
             }
             return View();
         }
-      
+
         [HttpPost]
         public async Task<IActionResult> PasswordChange(string user, string Password)
         {

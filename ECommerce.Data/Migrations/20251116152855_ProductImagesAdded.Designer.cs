@@ -4,6 +4,7 @@ using ECommerce.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20251116152855_ProductImagesAdded")]
+    partial class ProductImagesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,53 +133,53 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 529, DateTimeKind.Local).AddTicks(8589),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 309, DateTimeKind.Local).AddTicks(4223),
                             Email = "admin@gmail.com",
                             IsActive = true,
                             IsAdmin = true,
                             Name = "test",
                             Password = "123456",
                             Surname = "user",
-                            UserGuid = new Guid("274435be-5a4e-49f9-92c7-7f132a67ef8a"),
+                            UserGuid = new Guid("a70a1a32-ce0c-4a5e-8192-9a8091e3fa46"),
                             UserName = "admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 530, DateTimeKind.Local).AddTicks(9878),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 310, DateTimeKind.Local).AddTicks(5878),
                             Email = "yelda@example.com",
                             IsActive = true,
                             IsAdmin = false,
                             Name = "Yelda",
                             Password = "123456",
                             Surname = "Kuru",
-                            UserGuid = new Guid("d02930bc-271e-45ff-86a2-cf39ef5c7e30"),
+                            UserGuid = new Guid("3649d994-2617-4046-8506-51debf79652b"),
                             UserName = "yelda"
                         },
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 530, DateTimeKind.Local).AddTicks(9898),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 310, DateTimeKind.Local).AddTicks(5894),
                             Email = "ahmet@example.com",
                             IsActive = true,
                             IsAdmin = false,
                             Name = "Ahmet",
                             Password = "654321",
                             Surname = "Demir",
-                            UserGuid = new Guid("df08910a-8e9e-4aa3-b3c9-1b7cf81a82b7"),
+                            UserGuid = new Guid("c46b852c-dc1f-40f3-8ce3-f2a668e77afd"),
                             UserName = "ahmet"
                         },
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 530, DateTimeKind.Local).AddTicks(9910),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 310, DateTimeKind.Local).AddTicks(5896),
                             Email = "elif@example.com",
                             IsActive = true,
                             IsAdmin = false,
                             Name = "Elif",
                             Password = "123123",
                             Surname = "Yılmaz",
-                            UserGuid = new Guid("0965ab76-bafe-4441-9832-6eee4140422b"),
+                            UserGuid = new Guid("43d51eea-4afb-43b5-a42b-cc68fc66a611"),
                             UserName = "elif"
                         });
                 });
@@ -218,7 +221,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(6863),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3321),
                             IsActive = false,
                             Name = "Asus",
                             OrderNo = 0
@@ -226,7 +229,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7180),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3649),
                             IsActive = false,
                             Name = "HP",
                             OrderNo = 0
@@ -234,7 +237,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7181),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3651),
                             IsActive = false,
                             Name = "Sony",
                             OrderNo = 0
@@ -242,7 +245,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7182),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3652),
                             IsActive = false,
                             Name = "MSI",
                             OrderNo = 0
@@ -250,7 +253,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7183),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3652),
                             IsActive = false,
                             Name = "Logitech",
                             OrderNo = 0
@@ -258,7 +261,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7184),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3653),
                             IsActive = false,
                             Name = "Apple",
                             OrderNo = 0
@@ -266,7 +269,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 7,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7184),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3654),
                             IsActive = false,
                             Name = "Samsung",
                             OrderNo = 0
@@ -274,7 +277,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 8,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7185),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3655),
                             IsActive = false,
                             Name = "Dell",
                             OrderNo = 0
@@ -282,7 +285,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 9,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 531, DateTimeKind.Local).AddTicks(7186),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(3655),
                             IsActive = false,
                             Name = "Canon",
                             OrderNo = 0
@@ -332,7 +335,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(763),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(7345),
                             IsActive = true,
                             IsTopMenu = true,
                             Name = "Elektronik",
@@ -342,7 +345,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(1386),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(8009),
                             IsActive = true,
                             IsTopMenu = true,
                             Name = "Bilgisayar",
@@ -352,7 +355,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 3,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(1388),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(8012),
                             IsActive = true,
                             IsTopMenu = false,
                             Name = "Monitör",
@@ -362,7 +365,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 4,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(1389),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(8019),
                             IsActive = true,
                             IsTopMenu = false,
                             Name = "Klavye",
@@ -372,7 +375,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 5,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(1390),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(8021),
                             IsActive = true,
                             IsTopMenu = false,
                             Name = "Konsol",
@@ -382,7 +385,7 @@ namespace ECommerce.Data.Migrations
                         new
                         {
                             Id = 6,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 532, DateTimeKind.Local).AddTicks(1392),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 311, DateTimeKind.Local).AddTicks(8022),
                             IsActive = true,
                             IsTopMenu = false,
                             Name = "Aksesuar",
@@ -599,7 +602,7 @@ namespace ECommerce.Data.Migrations
                             Id = 1,
                             BrandId = 1,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(4204),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(1042),
                             Description = "15.6 inç Full HD, Ryzen 7 işlemci, 16 GB RAM, 512 GB SSD",
                             IsActive = true,
                             IsHome = true,
@@ -614,7 +617,7 @@ namespace ECommerce.Data.Migrations
                             Id = 2,
                             BrandId = 2,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5362),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2223),
                             Description = "13.3 inç, Intel i5, 8 GB RAM, 256 GB SSD",
                             IsActive = true,
                             IsHome = false,
@@ -629,7 +632,7 @@ namespace ECommerce.Data.Migrations
                             Id = 3,
                             BrandId = 3,
                             CategoryId = 5,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5365),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2227),
                             Description = "825 GB SSD, DualSense kumanda dahil",
                             IsActive = true,
                             IsHome = true,
@@ -644,7 +647,7 @@ namespace ECommerce.Data.Migrations
                             Id = 4,
                             BrandId = 4,
                             CategoryId = 3,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5376),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2229),
                             Description = "27 inç, 165Hz, 1ms, kavisli oyun monitörü",
                             IsActive = true,
                             IsHome = false,
@@ -659,7 +662,7 @@ namespace ECommerce.Data.Migrations
                             Id = 5,
                             BrandId = 5,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5378),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2231),
                             Description = "RGB aydınlatmalı, suya dayanıklı, oyun klavyesi",
                             IsActive = true,
                             IsHome = false,
@@ -674,7 +677,7 @@ namespace ECommerce.Data.Migrations
                             Id = 6,
                             BrandId = 6,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5381),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2232),
                             Description = "13.3 inç Retina, M1 çip, 8 GB RAM, 256 GB SSD",
                             IsActive = true,
                             IsHome = true,
@@ -689,7 +692,7 @@ namespace ECommerce.Data.Migrations
                             Id = 7,
                             BrandId = 7,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5382),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2234),
                             Description = "11 inç, Snapdragon 865+, 6 GB RAM, 128 GB depolama",
                             IsActive = true,
                             IsHome = false,
@@ -704,7 +707,7 @@ namespace ECommerce.Data.Migrations
                             Id = 8,
                             BrandId = 8,
                             CategoryId = 2,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5384),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2236),
                             Description = "13.4 inç FHD+, Intel i7, 16 GB RAM, 512 GB SSD",
                             IsActive = true,
                             IsHome = true,
@@ -719,7 +722,7 @@ namespace ECommerce.Data.Migrations
                             Id = 9,
                             BrandId = 9,
                             CategoryId = 1,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5386),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2238),
                             Description = "24.1 MP, 4K video, döndürülebilir ekran",
                             IsActive = true,
                             IsHome = false,
@@ -734,7 +737,7 @@ namespace ECommerce.Data.Migrations
                             Id = 10,
                             BrandId = 3,
                             CategoryId = 6,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5388),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2240),
                             Description = "Gürültü engelleme, Bluetooth 5.3, 30 saat pil",
                             IsActive = true,
                             IsHome = false,
@@ -749,7 +752,7 @@ namespace ECommerce.Data.Migrations
                             Id = 11,
                             BrandId = 1,
                             CategoryId = 4,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5390),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2241),
                             Description = "RGB mekanik oyun klavyesi, dayanıklı tuş yapısı",
                             IsActive = true,
                             IsHome = false,
@@ -764,7 +767,7 @@ namespace ECommerce.Data.Migrations
                             Id = 12,
                             BrandId = 4,
                             CategoryId = 6,
-                            CreateDate = new DateTime(2025, 11, 16, 18, 31, 15, 533, DateTimeKind.Local).AddTicks(5392),
+                            CreateDate = new DateTime(2025, 11, 16, 18, 28, 54, 313, DateTimeKind.Local).AddTicks(2243),
                             Description = "7200 DPI, ergonomik tasarım, RGB ışıklandırma",
                             IsActive = true,
                             IsHome = false,
@@ -799,7 +802,7 @@ namespace ECommerce.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("ECommerce.Core.Entities.Slider", b =>

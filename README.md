@@ -12,7 +12,6 @@ Users can view products, add them to their carts, and make purchases.
 - Admin panel (add/update/delete products)
 - Data management with SQL Server database
 - Entity Framework Core (Code First)
-- Logging (log4net)
 - Validation and Data Annotation support
 
 ---
@@ -23,7 +22,6 @@ Users can view products, add them to their carts, and make purchases.
 | ASP.NET MVC | 
 | Entity Framework Core | 
 | SQL Server | 
-| log4net | 
 | Bootstrap |
 | C#  |
 
@@ -34,3 +32,6 @@ Users can view products, add them to their carts, and make purchases.
  - Microsoft.EntityFrameworkCore.Design 
 
 
+ # For credit cart payment integration
+  - https://www.iyzico.com/ 
+  - https://github.com/iyzico/iyzipay-dotnet
