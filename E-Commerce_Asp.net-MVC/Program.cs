@@ -1,9 +1,9 @@
 using ECommerce.Data;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
 using ECommerce.Service.Abstract;
 using ECommerce.Service.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,7 +20,10 @@ builder.Services.AddSession(options=>
 //veriyi sunucuda saklamak için kullanýlýr.
 
 
-builder.Services.AddDbContext<DatabaseContext>();
+builder.Services.AddDbContext<DatabaseContext>(options=>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+});
 
 builder.Services.AddScoped(typeof(IService<>),typeof(Service<>));
 

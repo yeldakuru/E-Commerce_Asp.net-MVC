@@ -13,6 +13,12 @@ namespace ECommerce.Data
 {
    public class DatabaseContext:DbContext
     {
+        public DatabaseContext(DbContextOptions options) : base(options)
+        {
+        }
+
+        
+
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -26,7 +32,8 @@ namespace ECommerce.Data
         public DbSet<OrderLine> OrderLines { get; set; }
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=YELDA\SQLEXPRESS;Database=ECommerceDb;Trusted_Connection=True;TrustServerCertificate=True;");
+            //local db
+           
            optionsBuilder.ConfigureWarnings(warnings=>warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
             base.OnConfiguring(optionsBuilder);
           
